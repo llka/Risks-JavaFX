@@ -3,6 +3,7 @@ package darya.risks.backend.command.user;
 
 import darya.risks.backend.command.ActionCommand;
 import darya.risks.backend.exceprion.ApplicationException;
+import darya.risks.backend.service.ContactService;
 import darya.risks.backend.util.JsonUtil;
 import darya.risks.entity.Contact;
 import darya.risks.entity.enums.ResponseStatus;
@@ -43,7 +44,7 @@ public class GetContactCommand implements ActionCommand {
             }
         }
         if (contact != null) {
-            logger.debug(contact);
+            //logger.debug(contact);
             return new CommandResponse(JsonUtil.serialize(contact), ResponseStatus.OK);
         } else {
             return new CommandResponse("Contact not found", ResponseStatus.NOT_FOUND);

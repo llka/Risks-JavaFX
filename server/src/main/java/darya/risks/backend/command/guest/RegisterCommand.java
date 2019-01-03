@@ -3,6 +3,7 @@ package darya.risks.backend.command.guest;
 import darya.risks.backend.command.ActionCommand;
 import darya.risks.backend.command.CommandType;
 import darya.risks.backend.exceprion.ApplicationException;
+import darya.risks.backend.service.ContactService;
 import darya.risks.backend.util.JsonUtil;
 import darya.risks.entity.Contact;
 import darya.risks.entity.enums.ResponseStatus;

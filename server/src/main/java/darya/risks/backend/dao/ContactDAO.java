@@ -9,7 +9,6 @@ import darya.risks.entity.enums.RoleEnum;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
@@ -43,6 +42,12 @@ public class ContactDAO {
     private static final String COLUMN_EMAIL = "email";
     private static final String COLUMN_PASSWORD = "password";
     private static final String COLUMN_ROLE = "role";
+
+    private ProjectDAO projectDAO;
+
+    public ContactDAO() {
+        this.projectDAO = new ProjectDAO();
+    }
 
     public boolean login(@NotBlank String email, @NotBlank String password) throws ApplicationException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -149,6 +154,7 @@ public class ContactDAO {
             contact.setEmail(resultSet.getString(COLUMN_EMAIL));
             contact.setPassword(resultSet.getString(COLUMN_PASSWORD));
             contact.setRole(RoleEnum.valueOf(resultSet.getString(COLUMN_ROLE)));
+            contact.setProjects(projectDAO.getContactProjects(contact.getId()));
             return contact;
         } catch (SQLException e) {
             throw new ApplicationException("Error while building contact!" + e, ResponseStatus.BAD_REQUEST);

@@ -17,6 +17,7 @@ public class LogOutCommand implements ActionCommand {
     @Override
     public CommandResponse execute(CommandRequest request, CommandResponse response, Session session) {
 
+        logger.info("Visitor " + session.getVisitor().getContact().getEmail() + " Logged out.");
         session.setVisitor(new Visitor(RoleEnum.GUEST));
         session.getVisitor().setContact(null);
 

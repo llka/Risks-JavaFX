@@ -27,8 +27,12 @@ public class ProjectDAO {
 
     private static final String GET_BY_ID = "SELECT `project_id`, `title`, `start_date`, `end_date`, `contact_id`, `employer_id` " +
             " FROM `project` WHERE `project_id` = ?";
-    private static final String GET_ALL = "SELECT `ticket_id`, `place_number`, `cost`, `shedule_id` " +
-            "FROM `project`";
+    private static final String GET_ALL = "SELECT `project_id`, `title`, `start_date`, `end_date`, " +
+            " `contact_id`, `employer_id` " +
+            " FROM `project` ";
+    private static final String GET_CONTACT_PROJECTS = "SELECT `project_id`, `title`, `start_date`," +
+            " `end_date`, `contact_id`, `employer_id` " +
+            " FROM `project` WHERE `contact_id` = ?";
     private static final String DELETE = "DELETE FROM `ticket` WHERE `ticket_id`= ?";
 
     private static final String COLUMN_PROJECT_ID = "project_id";
@@ -133,6 +137,21 @@ public class ProjectDAO {
             return projects;
         } catch (SQLException e) {
             throw new ApplicationException("Cannot get all projects. " + e, ResponseStatus.BAD_REQUEST);
+        }
+    }
+
+    public List<Project> getContactProjects(@Positive int contactId) throws ApplicationException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_CONTACT_PROJECTS)) {
+            preparedStatement.setInt(1, contactId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Project> projects = new ArrayList<>();
+            while (resultSet.next()) {
+                projects.add(buildProject(resultSet));
+            }
+            return projects;
+        } catch (SQLException e) {
+            throw new ApplicationException("Cannot get contact projects. " + e, ResponseStatus.BAD_REQUEST);
         }
     }
 
