@@ -3,6 +3,7 @@ package darya.risks.entity;
 import darya.risks.entity.enums.EmployerPersonType;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class Employer implements DatabaseEntity {
@@ -11,11 +12,14 @@ public class Employer implements DatabaseEntity {
     private String firstName;
     @NotBlank
     private String lastName;
+    @NotNull
     private EmployerPersonType personType;
+    @NotBlank
     private String companyName;
     private String telephone;
     private String address;
     private String scopeOfWork;
+    private String passportNumber;
 
     public Employer() {
     }
@@ -84,6 +88,14 @@ public class Employer implements DatabaseEntity {
         this.scopeOfWork = scopeOfWork;
     }
 
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,12 +108,13 @@ public class Employer implements DatabaseEntity {
                 Objects.equals(companyName, employer.companyName) &&
                 Objects.equals(telephone, employer.telephone) &&
                 Objects.equals(address, employer.address) &&
-                Objects.equals(scopeOfWork, employer.scopeOfWork);
+                Objects.equals(scopeOfWork, employer.scopeOfWork) &&
+                Objects.equals(passportNumber, employer.passportNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, personType, companyName, telephone, address, scopeOfWork);
+        return Objects.hash(id, firstName, lastName, personType, companyName, telephone, address, scopeOfWork, passportNumber);
     }
 
     @Override

@@ -14,6 +14,7 @@ public class Job implements DatabaseEntity {
     private String description;
     @Positive
     private int durationInDays;
+    private Employee responsibleEmployee;
 
     public Job() {
     }
@@ -64,6 +65,14 @@ public class Job implements DatabaseEntity {
         this.jobType = jobType;
     }
 
+    public Employee getResponsibleEmployee() {
+        return responsibleEmployee;
+    }
+
+    public void setResponsibleEmployee(Employee responsibleEmployee) {
+        this.responsibleEmployee = responsibleEmployee;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,6 +98,7 @@ public class Job implements DatabaseEntity {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", durationInDays=" + durationInDays +
+                ", responsibleEmployee=" + responsibleEmployee +
                 '}';
     }
 }
