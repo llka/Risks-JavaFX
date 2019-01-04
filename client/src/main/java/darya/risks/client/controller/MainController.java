@@ -320,7 +320,7 @@ public class MainController {
     @FXML
     void openMyProjectsView(ActionEvent event) {
         if (isAuthenticatedUser()) {
-            MyProfileController.setFirst(true);
+            MyProjectsController.setFirstOpened(true);
             main.showView("/view/myProjectsView.fxml");
         } else {
             alert(Alert.AlertType.ERROR, "You are not authorized!", "You are not authorized!");

@@ -6,12 +6,16 @@ import darya.risks.backend.service.ContactService;
 import darya.risks.backend.util.JsonUtil;
 import darya.risks.dto.ProjectListDTO;
 import darya.risks.entity.Contact;
+import darya.risks.entity.Project;
 import darya.risks.entity.enums.ResponseStatus;
 import darya.risks.entity.technical.CommandRequest;
 import darya.risks.entity.technical.CommandResponse;
 import darya.risks.entity.technical.Session;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
+import java.util.Comparator;
+import java.util.List;
 
 public class GetMyProjectsCommand implements ActionCommand {
     private static final Logger logger = LogManager.getLogger(GetMyProjectsCommand.class);
@@ -21,7 +25,11 @@ public class GetMyProjectsCommand implements ActionCommand {
         ContactService contactService = new ContactService();
 
         Contact currentContact = contactService.getById(session.getVisitor().getContact().getId());
-        ProjectListDTO projectListDTO = new ProjectListDTO(currentContact.getProjects());
+        List<Project> projects = currentContact.getProjects();
+
+        projects.sort((Comparator.comparing(Project::getEndDate)));
+
+        ProjectListDTO projectListDTO = new ProjectListDTO();
         return new CommandResponse(JsonUtil.serialize(projectListDTO), ResponseStatus.OK);
     }
 }
