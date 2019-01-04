@@ -18,16 +18,17 @@ public class EmployerDAO {
     private static final Logger logger = LogManager.getLogger(EmployerDAO.class);
 
     private static final String SAVE = "INSERT INTO `employer` (`first_name`, `last_name`, `person_type`, `company_name`, " +
-            " `first_name`, `last_name`, `person_type`, `company_name`,) " +
+            " `telephone`, `address`, `scope_of_work`, `passport_number`) " +
             " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String UPDATE = "UPDATE `employer` SET `first_name` = ?, `last_name` = ?, `person_type` = ?, `company_name` = ?, " +
             " `telephone` = ?, `address` = ?, `scope_of_work` = ?, `passport_number = ?` " +
             " WHERE `employer_id` = ?";
-    private static final String GET_BY_ID = "SELECT `employer_id`, ``first_name`, `last_name`, `person_type`, " +
-            " `company_name`, `first_name`, `last_name`, `person_type`, `company_name`, " +
-            " FROM `employer` WHERE `employer_id` = ?";
-    private static final String GET_ALL = "SELECT `employer_id`, ``first_name`, `last_name`, `person_type`, " +
-            " `company_name`, `first_name`, `last_name`, `person_type`, `company_name`, " +
+    private static final String GET_BY_ID = "SELECT `employer_id`, `first_name`, `last_name`, `person_type`, " +
+            " `company_name`, `telephone`, `address`, `scope_of_work`, `passport_number` " +
+            " FROM `employer` " +
+            " WHERE `employer_id` = ?";
+    private static final String GET_ALL = "SELECT `employer_id`, `first_name`, `last_name`, `person_type`, " +
+            " `company_name`, `telephone`, `address`, `scope_of_work`, `passport_number` " +
             " FROM `employer` ";
     private static final String DELETE = "DELETE FROM `employer` WHERE `employer_id`= ?";
 

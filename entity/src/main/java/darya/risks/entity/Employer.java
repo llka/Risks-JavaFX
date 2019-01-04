@@ -130,4 +130,8 @@ public class Employer implements DatabaseEntity {
                 ", scopeOfWork='" + scopeOfWork + '\'' +
                 '}';
     }
+
+    public String readableValueForComboBox() {
+        return id + ", " + firstName + " " + lastName + ", " + companyName;
+    }
 }

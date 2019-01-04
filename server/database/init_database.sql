@@ -71,14 +71,14 @@ CREATE TABLE IF NOT EXISTS `risks`.`job` (
   `title` VARCHAR(100) NOT NULL,
   `description` VARCHAR(200) NULL,
   `duration_in_days` INT NULL,
-  `responsible_employee_id` INT NOT NULL,
+  `responsible_employee_id` INT NULL,
   PRIMARY KEY (`job_id`),
   INDEX `fk_job_employee1_idx` (`responsible_employee_id` ASC),
-  CONSTRAINT `fk_job_employee1`
-    FOREIGN KEY (`responsible_employee_id`)
-    REFERENCES `risks`.`employee` (`employee_id`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
+--  CONSTRAINT `fk_job_employee1`
+--    FOREIGN KEY (`responsible_employee_id`)
+--    REFERENCES `risks`.`employee` (`employee_id`)
+--    ON DELETE NO ACTION
+--    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

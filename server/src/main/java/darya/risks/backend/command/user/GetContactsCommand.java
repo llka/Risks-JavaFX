@@ -1,7 +1,6 @@
 package darya.risks.backend.command.user;
 
 
-
 import darya.risks.backend.command.ActionCommand;
 import darya.risks.backend.command.CommandType;
 import darya.risks.backend.exceprion.ApplicationException;

@@ -2,6 +2,7 @@ package darya.risks.entity;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +20,7 @@ public class Project implements DatabaseEntity {
     private Date endDate;
 
     public Project() {
+        jobs = new ArrayList<>();
     }
 
     public Project(@NotNull Employer employer, @NotBlank String title, List<Job> jobs, Date startDate, Date endDate) {

@@ -58,7 +58,11 @@ public class JobDAO {
             preparedStatement.setString(2, job.getTitle());
             preparedStatement.setString(3, job.getDescription());
             preparedStatement.setInt(4, job.getDurationInDays());
-            preparedStatement.setInt(5, job.getResponsibleEmployee().getId());
+            if (job.getResponsibleEmployee() != null) {
+                preparedStatement.setInt(5, job.getResponsibleEmployee().getId());
+            } else {
+                preparedStatement.setInt(5, 0);
+            }
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -98,7 +102,11 @@ public class JobDAO {
             preparedStatement.setString(2, job.getTitle());
             preparedStatement.setString(3, job.getDescription());
             preparedStatement.setInt(4, job.getDurationInDays());
-            preparedStatement.setInt(5, job.getResponsibleEmployee().getId());
+            if (job.getResponsibleEmployee() != null) {
+                preparedStatement.setInt(5, job.getResponsibleEmployee().getId());
+            } else {
+                preparedStatement.setInt(5, 0);
+            }
             preparedStatement.setInt(6, job.getId());
             preparedStatement.execute();
             return job;

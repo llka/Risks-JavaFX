@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,6 +28,7 @@ public class Contact implements DatabaseEntity {
     private List<Project> projects;
 
     public Contact() {
+        projects = new ArrayList<>();
     }
 
     public Contact(@NotBlank String firstName, @NotBlank String lastName, @Email String email, @NotBlank @Pattern(regexp = "^{4,}$") String password) {
