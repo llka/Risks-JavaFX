@@ -1,9 +1,13 @@
 package darya.risks.backend.command;
 
 
+import darya.risks.backend.command.admin.CreateContactCommand;
+import darya.risks.backend.command.admin.DeleteContactCommand;
+import darya.risks.backend.command.admin.GetAllEmployeesCommand;
+import darya.risks.backend.command.admin.GetAllProjectsCommand;
 import darya.risks.backend.command.guest.LogInCommand;
 import darya.risks.backend.command.guest.RegisterCommand;
-import darya.risks.backend.command.user.LogOutCommand;
+import darya.risks.backend.command.user.*;
 import darya.risks.entity.enums.RoleEnum;
 
 import java.util.EnumSet;
@@ -62,41 +66,34 @@ public enum CommandType {
         }
     },
 
-    GET_FILMS {
+    CREATE_PROJECT {
         {
-            this.command = new GetFilmsCommand();
-            this.role = EnumSet.of(RoleEnum.ADMIN, RoleEnum.USER);
+            this.command = new CreateProjectCommand();
+            this.role = EnumSet.of(RoleEnum.USER, RoleEnum.ADMIN);
+        }
+    },
+    GET_MY_PROJECTS {
+        {
+            this.command = new GetMyProjectsCommand();
+            this.role = EnumSet.of(RoleEnum.USER, RoleEnum.ADMIN);
+        }
+    },
+    GET_ALL_PROJECTS {
+        {
+            this.command = new GetAllProjectsCommand();
+            this.role = EnumSet.of(RoleEnum.ADMIN);
         }
     },
 
-    BUY_TICKET {
+    GET_ALL_EMPLOYERS {
         {
-            this.command = new BuyTicketCommand();
-            this.role = EnumSet.of(RoleEnum.ADMIN, RoleEnum.USER);
+            this.command = new GetAllEmployersCommand();
+            this.role = EnumSet.of(RoleEnum.USER, RoleEnum.ADMIN);
         }
     },
-
-    DELETE_SCHEDULE {
+    GET_ALL_EMPLOYEES {
         {
-            this.command = new DeleteScheduleCommand();
-            this.role = EnumSet.of(RoleEnum.ADMIN);
-        }
-    },
-    UPDATE_SCHEDULE {
-        {
-            this.command = new UpdateScheduleCommand();
-            this.role = EnumSet.of(RoleEnum.ADMIN);
-        }
-    },
-    UPDATE_FILM {
-        {
-            this.command = new UpdateFilmCommand();
-            this.role = EnumSet.of(RoleEnum.ADMIN);
-        }
-    },
-    CREATE_FILM {
-        {
-            this.command = new CreateFilmCommand();
+            this.command = new GetAllEmployeesCommand();
             this.role = EnumSet.of(RoleEnum.ADMIN);
         }
     },

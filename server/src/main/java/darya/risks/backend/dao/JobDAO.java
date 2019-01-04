@@ -20,6 +20,9 @@ public class JobDAO {
     private static final String SAVE = "INSERT INTO `job` (`job_type`, `title`, `description`, `duration_in_days`, " +
             " `responsible_employee_id`) " +
             " VALUES (?, ?, ?, ?, ?)";
+    private static final String SAVE_PROJECT_JOB = "INSERT INTO `project_has_job` (`job_job_id`, `project_project_id`) " +
+            " VALUES (?, ?)";
+
     private static final String UPDATE = "UPDATE `job` SET `job_type` = ?, `title` = ?, `description` = ?, " +
             " `duration_in_days` = ?, `responsible_employee_id` = ?  " +
             " WHERE `job_id` = ?";
@@ -72,6 +75,17 @@ public class JobDAO {
             }
             return job;
 
+        } catch (SQLException e) {
+            throw new ApplicationException("Cannot save job. " + job + ". " + e, ResponseStatus.BAD_REQUEST);
+        }
+    }
+
+    public void saveProjectJob(@Valid Job job, int projectId) throws ApplicationException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SAVE_PROJECT_JOB)) {
+            preparedStatement.setInt(1, job.getId());
+            preparedStatement.setInt(2, projectId);
+            preparedStatement.execute();
         } catch (SQLException e) {
             throw new ApplicationException("Cannot save job. " + job + ". " + e, ResponseStatus.BAD_REQUEST);
         }
@@ -155,7 +169,9 @@ public class JobDAO {
             job.setTitle(resultSet.getString(COLUMN_TITLE));
             job.setDescription(resultSet.getString(COLUMN_DESCRIPTION));
             job.setDurationInDays(resultSet.getInt(COLUMN_DURATION));
-            job.setResponsibleEmployee(employeeDAO.getById(resultSet.getInt(COLUMN_RESPONSIBLE_EMPL_ID)));
+            if (resultSet.getInt(COLUMN_RESPONSIBLE_EMPL_ID) != 0) {
+                job.setResponsibleEmployee(employeeDAO.getById(resultSet.getInt(COLUMN_RESPONSIBLE_EMPL_ID)));
+            }
             return job;
         } catch (SQLException e) {
             throw new ApplicationException("Error while building job! " + e, ResponseStatus.BAD_REQUEST);
