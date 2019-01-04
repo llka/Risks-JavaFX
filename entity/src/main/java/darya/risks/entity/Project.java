@@ -61,6 +61,10 @@ public class Project implements DatabaseEntity {
         this.jobs = jobs;
     }
 
+    public void addJob(Job job) {
+        this.jobs.add(job);
+    }
+
     public Date getStartDate() {
         return startDate;
     }

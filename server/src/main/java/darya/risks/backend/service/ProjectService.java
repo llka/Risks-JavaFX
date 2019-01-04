@@ -69,6 +69,21 @@ public class ProjectService {
         return projectDAO.getAll();
     }
 
+    public Project addRiskToProject(int projectId, Job risk) throws ApplicationException {
+        Project project = projectDAO.getById(projectId);
+
+        if (risk.getId() == 0) {
+            risk = jobDAO.save(risk);
+        }
+
+        project.addJob(risk);
+        calculateProjectEndDate(project);
+        project = projectDAO.update(project);
+        jobDAO.saveProjectJob(risk, project.getId());
+
+        return project;
+    }
+
     private void calculateProjectEndDate(Project project) {
         if (project.getStartDate() == null) {
             Date now = new Date();

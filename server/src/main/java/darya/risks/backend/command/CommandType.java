@@ -1,10 +1,7 @@
 package darya.risks.backend.command;
 
 
-import darya.risks.backend.command.admin.CreateContactCommand;
-import darya.risks.backend.command.admin.DeleteContactCommand;
-import darya.risks.backend.command.admin.GetAllEmployeesCommand;
-import darya.risks.backend.command.admin.GetAllProjectsCommand;
+import darya.risks.backend.command.admin.*;
 import darya.risks.backend.command.guest.LogInCommand;
 import darya.risks.backend.command.guest.RegisterCommand;
 import darya.risks.backend.command.user.*;
@@ -72,6 +69,12 @@ public enum CommandType {
             this.role = EnumSet.of(RoleEnum.USER, RoleEnum.ADMIN);
         }
     },
+    CREATE_JOB {
+        {
+            this.command = new CreateJobCommand();
+            this.role = EnumSet.of(RoleEnum.USER, RoleEnum.ADMIN);
+        }
+    },
     GET_MY_PROJECTS {
         {
             this.command = new GetMyProjectsCommand();
@@ -94,6 +97,24 @@ public enum CommandType {
     GET_ALL_EMPLOYEES {
         {
             this.command = new GetAllEmployeesCommand();
+            this.role = EnumSet.of(RoleEnum.ADMIN);
+        }
+    },
+    GET_BEST_EMPLOYEES_FOR_RISK {
+        {
+            this.command = new GetBestEmployeesForRiskCommand();
+            this.role = EnumSet.of(RoleEnum.ADMIN);
+        }
+    },
+    GET_ALL_RISKS {
+        {
+            this.command = new GetAllRisksCommand();
+            this.role = EnumSet.of(RoleEnum.ADMIN);
+        }
+    },
+    ADD_RISK_TO_PROJECT {
+        {
+            this.command = new AddRiskToProjectCommand();
             this.role = EnumSet.of(RoleEnum.ADMIN);
         }
     },

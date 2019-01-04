@@ -23,7 +23,7 @@ public class ProjectDAO {
     private static final String SAVE = "INSERT INTO `project`(`title`, `start_date`, `end_date`, `contact_id`, `employer_id`)" +
             " VALUES (?, ?, ?, ?, ?)";
     private static final String UPDATE = "UPDATE `project` SET `title` = ?, `start_date` = ?, `end_date` = ?, " +
-            " `contact_id` = ?, `employer_id` = ? WHERE `project_id` = ?";
+            " `employer_id` = ? WHERE `project_id` = ?";
 
     private static final String GET_BY_ID = "SELECT `project_id`, `title`, `start_date`, `end_date`, `contact_id`, `employer_id` " +
             " FROM `project` WHERE `project_id` = ?";
@@ -85,7 +85,7 @@ public class ProjectDAO {
         }
     }
 
-    public Project update(@Valid Project project, @Valid Contact contact) throws ApplicationException {
+    public Project update(@Valid Project project) throws ApplicationException {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_TIME_FORMAT_PATTERN);
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE)) {
@@ -96,13 +96,12 @@ public class ProjectDAO {
             if (project.getEndDate() != null) {
                 preparedStatement.setString(3, dateFormat.format(project.getEndDate()));
             }
-            preparedStatement.setInt(4, contact.getId());
             if (project.getEmployer() != null) {
-                preparedStatement.setInt(5, project.getEmployer().getId());
+                preparedStatement.setInt(4, project.getEmployer().getId());
             } else {
                 throw new ApplicationException("Cannot update project without employer!", ResponseStatus.BAD_REQUEST);
             }
-            preparedStatement.setInt(6, project.getId());
+            preparedStatement.setInt(5, project.getId());
 
             preparedStatement.execute();
             return project;
