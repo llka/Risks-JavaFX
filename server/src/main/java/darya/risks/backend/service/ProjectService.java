@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 public class ProjectService {
@@ -63,6 +64,35 @@ public class ProjectService {
 
         savedProject = projectDAO.getById(savedProject.getId());
         return savedProject;
+    }
+
+    public Project updateProject(Project project) throws ApplicationException {
+        if (project.getId() == 0) {
+            throw new ApplicationException("Cannot update project without ID!", ResponseStatus.BAD_REQUEST);
+        }
+        if (project.getEmployer() != null) {
+            if (project.getEmployer().getId() == 0) {
+                Employer savedEmployer = employerDAO.save(project.getEmployer());
+                project.setEmployer(savedEmployer);
+            }
+        } else {
+            throw new ApplicationException("Cannot update a project without employer!", ResponseStatus.BAD_REQUEST);
+        }
+        if (project.getJobs() == null || project.getJobs().isEmpty()) {
+            throw new ApplicationException("Cannot update a project without jobs!", ResponseStatus.BAD_REQUEST);
+        }
+
+        Project existingProject = projectDAO.getById(project.getId());
+        HashSet<Job> existingJobs = new HashSet<>(existingProject.getJobs());
+        for (Job job : project.getJobs()) {
+            if (job.getId() == 0 || !existingJobs.contains(job)) {
+                jobDAO.saveProjectJob(jobDAO.save(job), project.getId());
+            }
+        }
+        calculateProjectEndDate(project);
+
+        Project updatedProject = projectDAO.update(project);
+        return updatedProject;
     }
 
     public List<Project> getAll() throws ApplicationException {

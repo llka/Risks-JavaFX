@@ -6,20 +6,21 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0"
             prefWidth="664.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="darya.risks.client.controller.MyProjectsController">
+            fx:controller="darya.risks.client.controller.AllProjectsController">
     <children>
         <VBox layoutX="69.0" layoutY="24.0" prefHeight="112.0" prefWidth="110.0" spacing="4.0"/>
         <TableView fx:id="projectsTable" editable="true" layoutX="42.0" layoutY="89.0" prefHeight="354.0"
                    prefWidth="586.0" tableMenuButtonVisible="true">
             <columns>
-                <TableColumn fx:id="idColumn" prefWidth="57.0" style="-fx-alignment: CENTER;" text="Id"/>
-                <TableColumn fx:id="titleColumn" prefWidth="152.0" style="-fx-alignment: CENTER;" text="Title"/>
+                <TableColumn fx:id="idColumn" prefWidth="38.0" style="-fx-alignment: CENTER;" text="Id"/>
+                <TableColumn fx:id="titleColumn" prefWidth="130.0" style="-fx-alignment: CENTER;" text="Title"/>
                 <TableColumn fx:id="startDateColumn" style="-fx-alignment: CENTER;" text="Start date"/>
                 <TableColumn fx:id="endDateColumn" style="-fx-alignment: CENTER;" text="End Date"/>
-                <TableColumn fx:id="employerColumn" prefWidth="204.0" style="-fx-alignment: CENTER;" text="Employer"/>
+                <TableColumn fx:id="employerColumn" prefWidth="165.0" style="-fx-alignment: CENTER;" text="Employer"/>
+                <TableColumn fx:id="editColumn" prefWidth="92.0" style="-fx-alignment: CENTER;" text="Edit"/>
             </columns>
         </TableView>
-        <Label layoutX="283.0" layoutY="38.0" text="My Projects">
+        <Label layoutX="283.0" layoutY="38.0" text="All Projects">
             <font>
                 <Font size="14.0"/>
             </font>

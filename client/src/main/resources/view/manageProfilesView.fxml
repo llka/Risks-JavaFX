@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0"
             prefWidth="664.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="darya.risks.client.controller.ManageProfilesController">
@@ -36,16 +39,15 @@
                 <Label text="Password"/>
             </children>
         </VBox>
-        <Separator layoutY="14.0" prefHeight="4.0" prefWidth="664.0"/>
         <Separator layoutX="180.0" layoutY="14.0" orientation="VERTICAL" prefHeight="333.0" prefWidth="7.0"/>
         <TableView fx:id="contactsTable" editable="true" layoutX="193.0" layoutY="102.0" prefHeight="234.0"
                    prefWidth="393.0" tableMenuButtonVisible="true">
             <columns>
-                <TableColumn fx:id="userIdColumn" prefWidth="57.0" text="Id"/>
+                <TableColumn fx:id="userIdColumn" prefWidth="57.0" style="-fx-alignment: CENTER;" text="Id"/>
                 <TableColumn fx:id="userFirstNameColumn" prefWidth="75.0" text="Name"/>
                 <TableColumn fx:id="userLastNameColumn" prefWidth="73.0" text="LastName"/>
-                <TableColumn fx:id="userEmailColumn" prefWidth="79.0" text="Email"/>
-                <TableColumn fx:id="userRoleColumn" prefWidth="73.0" text="Role"/>
+                <TableColumn fx:id="userEmailColumn" prefWidth="79.0" style="-fx-alignment: CENTER;" text="Email"/>
+                <TableColumn fx:id="userRoleColumn" prefWidth="73.0" style="-fx-alignment: CENTER;" text="Role"/>
             </columns>
         </TableView>
         <Button fx:id="getAllUsersBtn" layoutX="260.0" layoutY="70.0" mnemonicParsing="false" onAction="#getAllUsers"

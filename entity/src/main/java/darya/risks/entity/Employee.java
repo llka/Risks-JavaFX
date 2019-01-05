@@ -89,4 +89,8 @@ public class Employee implements DatabaseEntity {
                 ", telephone='" + telephone + '\'' +
                 '}';
     }
+
+    public String readableValue() {
+        return id + ", " + firstName + " " + lastName + ", " + companyName + ", " + telephone;
+    }
 }

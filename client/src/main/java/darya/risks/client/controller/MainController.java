@@ -57,8 +57,6 @@ public class MainController {
     @FXML
     private MenuItem menuMyProjects;
     @FXML
-    private MenuItem menuEditProjects;
-    @FXML
     private MenuItem menuAllProjects;
     @FXML
     private MenuItem menuNewProject;
@@ -341,20 +339,11 @@ public class MainController {
     @FXML
     void openAllProjectsView(ActionEvent event) {
         if (isAuthenticatedAdmin()) {
-            MyProfileController.setFirst(true);
+            AllProjectsController.setFirstOpened(true);
+            AllProjectsController.setMain(main);
             main.showView("/view/allProjectsView.fxml");
         } else {
             alert(Alert.AlertType.ERROR, "You are not authorized!", "Only Admin can see all projects!!");
-        }
-    }
-
-    @FXML
-    void openEditProjectsView(ActionEvent event) {
-        if (isAuthenticatedAdmin()) {
-            MyProfileController.setFirst(true);
-            main.showView("/view/editProjectsView.fxml");
-        } else {
-            alert(Alert.AlertType.ERROR, "You are not authorized!", "Only Admin can edit projects!");
         }
     }
 
@@ -373,7 +362,6 @@ public class MainController {
             menuNewProject.setDisable(true);
 
             menuAllProjects.setDisable(true);
-            menuEditProjects.setDisable(true);
             menuManageUsersProfiles.setDisable(true);
         } else {
             if (session.getVisitor() != null) {
@@ -390,7 +378,6 @@ public class MainController {
                         menuNewProject.setDisable(true);
 
                         menuAllProjects.setDisable(true);
-                        menuEditProjects.setDisable(true);
                         menuManageUsersProfiles.setDisable(true);
 
                         break;
@@ -404,7 +391,6 @@ public class MainController {
                         menuNewProject.setDisable(false);
 
                         menuAllProjects.setDisable(true);
-                        menuEditProjects.setDisable(true);
                         menuManageUsersProfiles.setDisable(true);
 
                         break;
@@ -418,7 +404,6 @@ public class MainController {
                         menuNewProject.setDisable(false);
 
                         menuAllProjects.setDisable(false);
-                        menuEditProjects.setDisable(false);
                         menuManageUsersProfiles.setDisable(false);
                         break;
                     default:

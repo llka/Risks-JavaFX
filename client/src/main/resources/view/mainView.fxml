@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0"
             prefWidth="664.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="darya.risks.client.controller.MainController">
@@ -42,8 +45,6 @@
                                   onAction="#openNewProjectView" text="New Project"/>
                         <MenuItem fx:id="menuAllProjects" disable="true" mnemonicParsing="false"
                                   onAction="#openAllProjectsView" text="All Projects"/>
-                        <MenuItem fx:id="menuEditProjects" disable="true" mnemonicParsing="false"
-                                  onAction="#openEditProjectsView" text="Edit Projects"/>
                     </items>
                 </Menu>
             </menus>

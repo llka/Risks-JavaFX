@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0"
-            prefWidth="664.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="darya.risks.client.controller.NewProjectController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            onMouseEntered="#onMouseEntered" prefHeight="470.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="darya.risks.client.controller.EditProjectController">
     <children>
-        <Button fx:id="addNewJobBtn" layoutX="541.0" layoutY="198.0" mnemonicParsing="false" onAction="#addNewJob"
+        <Button fx:id="addNewJobBtn" layoutX="541.0" layoutY="139.0" mnemonicParsing="false" onAction="#addNewJob"
                 prefHeight="25.0" prefWidth="100.0" text="Add New Job"/>
-        <Button fx:id="okBtn" layoutX="550.0" layoutY="429.0" mnemonicParsing="false" onAction="#createProject"
-                prefHeight="25.0" prefWidth="83.0" text="Ok"/>
+        <Button fx:id="saveBtn" layoutX="494.0" layoutY="437.0" mnemonicParsing="false" onAction="#saveProject"
+                prefHeight="25.0" prefWidth="83.0" text="Save"/>
         <VBox layoutX="112.0" layoutY="81.0" prefHeight="101.0" prefWidth="423.0" spacing="4.0">
             <children>
                 <ComboBox fx:id="employerComboBox" prefHeight="25.0" prefWidth="428.0"/>
@@ -30,22 +30,25 @@
                 <Label text="Start Date"/>
             </children>
         </VBox>
-        <TableView fx:id="jobsTable" editable="true" layoutX="112.0" layoutY="198.0" prefHeight="256.0"
-                   prefWidth="423.0" tableMenuButtonVisible="true">
+        <TableView fx:id="jobsTable" editable="true" layoutX="112.0" layoutY="174.0" prefHeight="256.0"
+                   prefWidth="528.0" tableMenuButtonVisible="true">
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="28.0" text="Id"/>
-                <TableColumn fx:id="jobTitleColumn" prefWidth="116.0" text="Title"/>
-                <TableColumn fx:id="descriptionColumn" minWidth="6.0" prefWidth="170.0" text="Description"/>
-                <TableColumn fx:id="durationColumn" prefWidth="95.0" text="Duration (days)"/>
+                <TableColumn fx:id="jobTitleColumn" prefWidth="110.0" text="Title"/>
+                <TableColumn fx:id="descriptionColumn" minWidth="6.0" prefWidth="146.0" text="Description"/>
+                <TableColumn fx:id="durationColumn" prefWidth="98.0" text="Duration (days)"/>
+                <TableColumn fx:id="responsibleEmployeeColumn" prefWidth="132.0" text="Responsible Employee"/>
             </columns>
         </TableView>
         <Button fx:id="newEmployerBtn" layoutX="541.0" layoutY="81.0" mnemonicParsing="false" onAction="#useNewEmployer"
                 prefHeight="25.0" prefWidth="100.0" text="New Employer"/>
-        <Label alignment="CENTER" layoutX="295.0" layoutY="36.0" text="New Project">
+        <Label alignment="CENTER" layoutX="295.0" layoutY="36.0" text="Edit Project">
             <font>
                 <Font size="14.0"/>
             </font>
         </Label>
-        <Label layoutX="33.0" layoutY="202.0" text="Jobs:"/>
+        <Label layoutX="33.0" layoutY="174.0" text="Jobs:"/>
+        <Button fx:id="cancelBtn" layoutX="588.0" layoutY="437.0" mnemonicParsing="false" onAction="#cancel"
+                text="Cancel"/>
     </children>
 </AnchorPane>

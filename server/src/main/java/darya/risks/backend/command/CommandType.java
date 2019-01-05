@@ -69,6 +69,12 @@ public enum CommandType {
             this.role = EnumSet.of(RoleEnum.USER, RoleEnum.ADMIN);
         }
     },
+    UPDATE_PROJECT {
+        {
+            this.command = new UpdateProjectCommand();
+            this.role = EnumSet.of(RoleEnum.ADMIN);
+        }
+    },
     CREATE_JOB {
         {
             this.command = new CreateJobCommand();

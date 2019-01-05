@@ -1,5 +1,6 @@
 package darya.risks.client.controller;
 
+import darya.risks.client.Main;
 import darya.risks.client.client.ContextHolder;
 import darya.risks.client.exception.ClientException;
 import darya.risks.client.util.JsonUtil;
@@ -22,8 +23,8 @@ import java.util.Date;
 
 import static darya.risks.client.util.AlertUtil.alert;
 
-public class MyProjectsController {
-    private static final Logger logger = LogManager.getLogger(NewProjectController.class);
+public class AllProjectsController {
+    private static final Logger logger = LogManager.getLogger(AllProjectsController.class);
 
     private static final String DATE_TIME_FORMAT_PATTERN = "yyyy-MM-dd";
     private static final String BG_COLOR_PROPERTY_KEY = "-fx-background-color: ";
@@ -32,6 +33,8 @@ public class MyProjectsController {
     private static final int DAYS_BEFORE_PROJECT_END_YELLOW = 15;
 
     private static boolean firstOpened = true;
+
+    private static Main main;
 
     @FXML
     private TableView projectsTable;
@@ -43,6 +46,8 @@ public class MyProjectsController {
     private TableColumn<Project, String> startDateColumn;
     @FXML
     private TableColumn<Project, String> employerColumn;
+    @FXML
+    private TableColumn<Project, String> editColumn;
     @FXML
     private TableColumn<Project, Integer> idColumn;
 
@@ -62,17 +67,40 @@ public class MyProjectsController {
                     setText(item);
 
                     TableRow row = getTableRow();
-                    Date now = new Date();
-                    try {
-                        Date endDate = dateFormat.parse(item);
-                        if (DateUtils.addDays(now, DAYS_BEFORE_PROJECT_END_YELLOW).after(endDate) && endDate.after(now)) {
-                            row.setStyle(BG_COLOR_PROPERTY_KEY + COLOR_YELLOW);
-                        } else if (endDate.before(now)) {
-                            row.setStyle(BG_COLOR_PROPERTY_KEY + COLOR_RED);
+                    if (row != null) {
+                        Date now = new Date();
+                        try {
+                            Date endDate = dateFormat.parse(item);
+                            if (DateUtils.addDays(now, DAYS_BEFORE_PROJECT_END_YELLOW).after(endDate) && endDate.after(now)) {
+                                row.setStyle(BG_COLOR_PROPERTY_KEY + COLOR_YELLOW);
+                            } else if (endDate.before(now)) {
+                                row.setStyle(BG_COLOR_PROPERTY_KEY + COLOR_RED);
+                            }
+                        } catch (ParseException e) {
+                            logger.error("Date parsing error! " + e);
+                        } catch (Exception e) {
+                            logger.warn(e);
                         }
-                    } catch (ParseException e) {
-                        logger.error("Date parsing error! " + e);
                     }
+                }
+            }
+        });
+
+        editColumn.setCellFactory(column -> new TableCell<Project, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                Button editButton = new Button("Edit");
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText("");
+                } else {
+                    editButton.setOnAction(event -> {
+                        TableRow row = getTableRow();
+                        Project project = (Project) row.itemProperty().getValue();
+                        openEditProjectView(project);
+                    });
+                    setGraphic(editButton);
+                    setText(null);
                 }
             }
         });
@@ -104,7 +132,7 @@ public class MyProjectsController {
 
     private void fillTable() {
         try {
-            ContextHolder.getClient().sendRequest(new CommandRequest("GET_MY_PROJECTS"));
+            ContextHolder.getClient().sendRequest(new CommandRequest("GET_ALL_PROJECTS"));
             CommandResponse response = ContextHolder.getLastResponse();
             if (response.getStatus().is2xxSuccessful()) {
                 ProjectListDTO projectListDTO = JsonUtil.deserialize(response.getBody(), ProjectListDTO.class);
@@ -114,8 +142,14 @@ public class MyProjectsController {
             }
         } catch (ClientException e) {
             logger.error(e);
-            alert(Alert.AlertType.ERROR, "Cannot get my projects!", e.getMessage());
+            alert(Alert.AlertType.ERROR, "Cannot get all projects!", e.getMessage());
         }
+    }
+
+    private void openEditProjectView(Project project) {
+        EditProjectController.setMain(main);
+        EditProjectController.setProject(project);
+        main.showView("/view/editProjectView.fxml");
     }
 
     public static boolean isFirstOpened() {
@@ -123,6 +157,14 @@ public class MyProjectsController {
     }
 
     public static void setFirstOpened(boolean firstOpened) {
-        MyProjectsController.firstOpened = firstOpened;
+        AllProjectsController.firstOpened = firstOpened;
+    }
+
+    public static Main getMain() {
+        return main;
+    }
+
+    public static void setMain(Main main) {
+        AllProjectsController.main = main;
     }
 }
