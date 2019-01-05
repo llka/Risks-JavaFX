@@ -1,6 +1,7 @@
 package darya.risks.backend.command.user;
 
 import darya.risks.backend.command.ActionCommand;
+import darya.risks.backend.dao.ProjectDAO;
 import darya.risks.backend.exceprion.ApplicationException;
 import darya.risks.backend.service.ContactService;
 import darya.risks.backend.util.JsonUtil;
@@ -25,11 +26,13 @@ public class GetMyProjectsCommand implements ActionCommand {
         ContactService contactService = new ContactService();
 
         Contact currentContact = contactService.getById(session.getVisitor().getContact().getId());
-        List<Project> projects = currentContact.getProjects();
+
+        ProjectDAO projectDAO = new ProjectDAO();
+        List<Project> projects = projectDAO.getContactProjects(currentContact.getId());
 
         projects.sort((Comparator.comparing(Project::getEndDate)));
 
-        ProjectListDTO projectListDTO = new ProjectListDTO();
+        ProjectListDTO projectListDTO = new ProjectListDTO(projects);
         return new CommandResponse(JsonUtil.serialize(projectListDTO), ResponseStatus.OK);
     }
 }

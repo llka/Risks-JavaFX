@@ -7,27 +7,26 @@ import darya.risks.dto.ProjectListDTO;
 import darya.risks.entity.Project;
 import darya.risks.entity.technical.CommandRequest;
 import darya.risks.entity.technical.CommandResponse;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static darya.risks.client.util.AlertUtil.alert;
 
 public class MyProjectsController {
     private static final Logger logger = LogManager.getLogger(NewProjectController.class);
 
-    private static final String DATE_TIME_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    private static final String DATE_TIME_FORMAT_PATTERN = "yyyy-MM-dd";
+    private static final int DAYS_BEFORE_PROJECT_END_YELLOW = 15;
 
     private static boolean firstOpened = true;
 
@@ -50,14 +49,30 @@ public class MyProjectsController {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_TIME_FORMAT_PATTERN);
         logger.debug("initialize");
 
-        projectsTable.setRowFactory(val -> {
-            TableRow<Project> row = new TableRow<>();
-            logger.debug("binding " + row.idProperty().toString());
-//            BooleanBinding critical = row.itemProperty().
-//            row.styleProperty().bind(Bindings.when(critical)
-//                    .then("-fx-background-color: red ;")
-//                    .otherwise(""));
-            return row ;
+        endDateColumn.setCellFactory(column -> new TableCell<Project, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText("");
+
+                } else {
+                    setText(item);
+
+                    TableRow row = getTableRow();
+                    Date now = new Date();
+                    try {
+                        Date endDate = dateFormat.parse(item);
+                        if (DateUtils.addDays(now, DAYS_BEFORE_PROJECT_END_YELLOW).after(endDate) && endDate.after(now)) {
+                            row.setStyle("-fx-background-color: #F7FB76;");
+                        } else if (endDate.before(now)) {
+                            row.setStyle("-fx-background-color: #FD5656;");
+                        }
+                    } catch (ParseException e) {
+                        logger.error("Date parsing error! " + e);
+                    }
+                }
+            }
         });
 
 
@@ -89,7 +104,6 @@ public class MyProjectsController {
         try {
             ContextHolder.getClient().sendRequest(new CommandRequest("GET_MY_PROJECTS"));
             CommandResponse response = ContextHolder.getLastResponse();
-            logger.debug("Response " + response);
             if (response.getStatus().is2xxSuccessful()) {
                 ProjectListDTO projectListDTO = JsonUtil.deserialize(response.getBody(), ProjectListDTO.class);
                 projectsTable.setItems(FXCollections.observableArrayList(projectListDTO.getProjectList()));

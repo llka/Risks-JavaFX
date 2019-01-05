@@ -14,9 +14,9 @@
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="57.0" text="Id" />
                 <TableColumn fx:id="titleColumn" prefWidth="152.0" text="Title" />
-                <TableColumn fx:id="startDateColumn" prefWidth="78.0" text="Start date" />
-                <TableColumn fx:id="endDateColumn" prefWidth="101.0" text="End Date" />
-                <TableColumn fx:id="employerColumn" prefWidth="187.0" text="Employer" />
+                <TableColumn fx:id="startDateColumn" text="Start date" />
+                <TableColumn fx:id="endDateColumn" text="End Date" />
+                <TableColumn fx:id="employerColumn" prefWidth="204.0" text="Employer" />
             </columns>
         </TableView>
       <Label layoutX="283.0" layoutY="38.0" text="My Projects">
