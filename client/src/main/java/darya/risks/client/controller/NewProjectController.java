@@ -119,8 +119,8 @@ public class NewProjectController {
         description.setPromptText("Description");
         ComboBox<String> jobType = new ComboBox();
         jobType.setItems(FXCollections.observableArrayList(
-                JobType.NORMAL_JOB.toString(),
-                JobType.RISK.toString()
+                JobType.NORMAL_JOB.getDisplayedValue(),
+                JobType.RISK.getDisplayedValue()
         ));
         TextField duration = new TextField();
         duration.setPromptText("1");
@@ -155,7 +155,7 @@ public class NewProjectController {
                                       public Job call(ButtonType buttonType) {
                                           if (buttonType == okButtonType) {
                                               Job job = new Job();
-                                              job.setJobType(JobType.valueOf(jobType.getValue()));
+                                              job.setJobType(JobType.getByDisplayedValue(jobType.getValue()));
                                               job.setDescription(description.getText());
                                               job.setTitle(title.getText());
                                               job.setDurationInDays(Integer.parseInt(duration.getText()));
@@ -278,8 +278,8 @@ public class NewProjectController {
         lastName.setPromptText("Last Name");
         ComboBox<String> personType = new ComboBox();
         personType.setItems(FXCollections.observableArrayList(
-                EmployerPersonType.INDIVIDUAL.toString(),
-                EmployerPersonType.LEGAL_PERSON.toString()
+                EmployerPersonType.INDIVIDUAL.getDisplayedValue(),
+                EmployerPersonType.LEGAL_PERSON.getDisplayedValue()
         ));
         TextField companyName = new TextField();
         companyName.setPromptText("Company Name");
@@ -325,7 +325,7 @@ public class NewProjectController {
                                               Employer employer = new Employer();
                                               employer.setFirstName(firstName.getText());
                                               employer.setLastName(lastName.getText());
-                                              employer.setPersonType(EmployerPersonType.valueOf(personType.getValue()));
+                                              employer.setPersonType(EmployerPersonType.getByDisplayedValue(personType.getValue()));
                                               employer.setCompanyName(companyName.getText());
                                               employer.setTelephone(telephone.getText());
                                               employer.setAddress(address.getText());
