@@ -1,0 +1,8 @@
+
+csquid:S2095"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(ò¡¥¹8ı×¤Ë-
+csquid:S2095"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(ò¡¥¹8ı×¤Ë-
+csquid:S2095"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(ò¡¥¹8ı×¤Ë-
+Fsquid:S1068"*Remove this unused "logger" private field.(¯È8ı×¤Ë-
+©squid:S1192"ŒDefine a constant instead of duplicating this literal "SELECT `contact_id`, `first_name`, `last_name`, `email`, `password`, `role`" 3 times.(ñÉê®8ı×¤Ë-
+vsquid:S2068"U'PASSWORD' detected in this expression, review this potentially hardcoded credential.(Àœªœùÿÿÿÿ8ı×¤Ë-
+jsquid:S1192"NDefine a constant instead of duplicating this literal " in database." 3 times.(ŞÔ–8ı×¤Ë-

@@ -1,0 +1,6 @@
+
+hsquid:S3959"GRefactor this code so that this consumed stream pipeline is not reused.(Ü¢´¹ûÿÿÿÿ8œïÒË-
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(Çê›‰8œïÒË-
+nsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(Æˆûé8œïÒË-
+Tsquid:S1611"3Remove the parentheses around the "entry" parameter(Ü¢´¹ûÿÿÿÿ8œïÒË-
+Dsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8œïÒË-

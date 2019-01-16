@@ -1,0 +1,12 @@
+
+osquid:CommentedOutCodeLine‰"<This block of commented-out lines of code should be removed.(šœ¬Âùÿÿÿÿ8–¼Ìö-
+psquid:S3776Ø"RRefactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.(ªÝq8Ú¨áö-
+Psquid:S1602Þ",Remove useless curly braces around statement(ÿ¸«Ôýÿÿÿÿ8òËö-
+lsquid:S1854ˆ"HRemove this useless assignment to local variable "employeesForCheckBox".(Žâ¼”ýÿÿÿÿ8–¼Ìö-
+]squid:S1481ˆ"9Remove this unused "employeesForCheckBox" local variable.(Žâ¼”ýÿÿÿÿ8–¼Ìö-
+Psquid:S1612¸",Replace this lambda with a method reference.(´ œ“üÿÿÿÿ8òËö-
+Ysquid:S2696g"6Make the enclosing method "static" or remove this set.(ŠÐí–þÿÿÿÿ8òËö-
+~squid:S1192ù"ZDefine a constant instead of duplicating this literal "Cannot get all employers!" 3 times.(Ÿ—¡”ýÿÿÿÿ8Ú¨áö-
+Ksquid:S1612ã",Replace this lambda with a method reference.(Ë½ó½8òËö-
+Ysquid:S1141ê"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8Ú¨áö-
+jsquid:CommentedOutCodeLine‹"<This block of commented-out lines of code should be removed.(­¾Ó8–¼Ìö-

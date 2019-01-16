@@ -40,6 +40,8 @@ public class MainController {
     }
 
     @FXML
+    private MenuItem menuGenerateReport;
+    @FXML
     private MenuItem menuMyProfile;
     @FXML
     private MenuItem menuManageUsersProfiles;
@@ -311,6 +313,28 @@ public class MainController {
             main.showView("/view/manageProfilesView.fxml");
         } else {
             alert(Alert.AlertType.ERROR, "You are not authorized!", "Only Admin can manage contacts!");
+        }
+    }
+
+    @FXML
+    void generateReport(ActionEvent event) {
+        if (isAuthenticatedUser()) {
+            try {
+                ContextHolder.getClient().sendRequest(new CommandRequest("GENERATE_EXCEL_PROJECTS_REPORT"));
+
+                CommandResponse response = ContextHolder.getLastResponse();
+                if (response.getStatus().is2xxSuccessful()) {
+                    main.showGuestMainView();
+                    alert("Successfully generated report!");
+                } else {
+                    alert(Alert.AlertType.ERROR, "Cannot generate report!", response.getBody());
+                }
+
+            } catch (ClientException e) {
+                alert(Alert.AlertType.ERROR, "Cannot generate report!", e.getMessage());
+            }
+        } else {
+            alert(Alert.AlertType.ERROR, "You are not authorized!", "You are not authorized!");
         }
     }
 

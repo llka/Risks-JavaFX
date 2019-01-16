@@ -125,6 +125,13 @@ public enum CommandType {
         }
     },
 
+    GENERATE_EXCEL_PROJECTS_REPORT {
+        {
+            this.command = new GenerateProjectsReport();
+            this.role = EnumSet.of(RoleEnum.USER, RoleEnum.ADMIN);
+        }
+    },
+
 
     EMPTY {
         {

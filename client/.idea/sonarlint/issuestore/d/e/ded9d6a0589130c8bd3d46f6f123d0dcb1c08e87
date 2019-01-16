@@ -1,0 +1,8 @@
+
+hsquid:S1192_"JDefine a constant instead of duplicating this literal "Response " 5 times.(áÜÍ‘8ğ°ù÷-
+jsquid:S1192ƒ"FDefine a constant instead of duplicating this literal "email" 3 times.(æıİ‚ûÿÿÿÿ8ğ°ù÷-
+ysquid:S1192‘"UDefine a constant instead of duplicating this literal "Cannot find contact!" 6 times.(óÄßŠıÿÿÿÿ8ğ°ù÷-
+‡squid:S1192†"cDefine a constant instead of duplicating this literal "Enter an email or id to search by!" 3 times.(Ø½â¦şÿÿÿÿ8ğ°ù÷-
+Ysquid:S2696W"6Make the enclosing method "static" or remove this set.(ŠĞí–şÿÿÿÿ8ğ°ù÷-
+Ysquid:S1141Î"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8ğ°ù÷-
+vsquid:S3776º"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(©”ìîúÿÿÿÿ8ğ°ù÷-

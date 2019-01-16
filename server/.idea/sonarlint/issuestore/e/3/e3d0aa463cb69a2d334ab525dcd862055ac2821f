@@ -1,0 +1,9 @@
+
+Vsquid:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8Õª‚ò-
+lsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(‡€¨•ûÿÿÿÿ8Õª‚ò-
+Vsquid:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8Õª‚ò-
+bsquid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€8Õª‚ò-
+bsquid:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€8Õª‚ò-
+Fsquid:S3398"%Move this method into "ClientThread".(†Íüùÿÿÿÿ8Õª‚ò-
+Vsquid:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ8Õª‚ò-
+Xsquid:S2589"7Remove this expression which always evaluates to "true"(¼šÀˆùÿÿÿÿ8Õª‚ò-

@@ -1,0 +1,7 @@
+
+nsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(±ãË8í†–¢-
+ssquid:S00116"QRename this field "DRIVER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—ŞÅœşÿÿÿÿ8í†–¢-
+ksquid:S00116"NRename this field "URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(”ß˜Ş8í†–¢-
+msquid:S00116"PRename this field "LOGIN" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üİëµ8í†–¢-
+qsquid:S00116"TRename this field "POOL_SIZE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×êÚ›8í†–¢-
+usquid:S00116"SRename this field "PASSWORD" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ú‘ úÿÿÿÿ8í†–¢-
