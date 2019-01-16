@@ -72,6 +72,8 @@ public class MyProjectsController {
                         }
                     } catch (ParseException e) {
                         logger.error("Date parsing error! " + e);
+                    }catch (Exception e){
+
                     }
                 }
             }

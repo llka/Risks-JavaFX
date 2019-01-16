@@ -78,6 +78,18 @@ public class Main extends Application {
     }
 
 
+    public Stage getWindow() {
+        return window;
+    }
+
+    public Scene getStartPage() {
+        return startPage;
+    }
+
+    public BorderPane getMainView() {
+        return mainView;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }

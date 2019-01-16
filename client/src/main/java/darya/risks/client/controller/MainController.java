@@ -19,10 +19,12 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.DirectoryChooser;
 import javafx.util.Pair;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -316,11 +318,32 @@ public class MainController {
         }
     }
 
+    private String chooseDirectory() {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        // Set title for DirectoryChooser
+        directoryChooser.setTitle("Select Directory");
+        // Set Initial Directory
+        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+
+        File directory = directoryChooser.showDialog(main.getWindow());
+        if (directory != null) {
+            logger.debug("chosen directory " + directory.getAbsolutePath());
+            return directory.getAbsolutePath();
+        } else {
+            return "";
+        }
+    }
+
     @FXML
     void generateReport(ActionEvent event) {
         if (isAuthenticatedUser()) {
+            String directoryPath = chooseDirectory();
+            Map<String, String> params = new HashMap<>();
+            params.put("path", directoryPath);
+
             try {
-                ContextHolder.getClient().sendRequest(new CommandRequest("GENERATE_EXCEL_PROJECTS_REPORT"));
+                ContextHolder.getClient().sendRequest(new CommandRequest("GENERATE_EXCEL_PROJECTS_REPORT", params));
 
                 CommandResponse response = ContextHolder.getLastResponse();
                 if (response.getStatus().is2xxSuccessful()) {
@@ -387,6 +410,7 @@ public class MainController {
 
             menuAllProjects.setDisable(true);
             menuManageUsersProfiles.setDisable(true);
+            menuGenerateReport.setDisable(true);
         } else {
             if (session.getVisitor() != null) {
                 menuServerConnect.setDisable(true);
@@ -403,6 +427,7 @@ public class MainController {
 
                         menuAllProjects.setDisable(true);
                         menuManageUsersProfiles.setDisable(true);
+                        menuGenerateReport.setDisable(true);
 
                         break;
                     case USER:
@@ -416,6 +441,7 @@ public class MainController {
 
                         menuAllProjects.setDisable(true);
                         menuManageUsersProfiles.setDisable(true);
+                        menuGenerateReport.setDisable(false);
 
                         break;
                     case ADMIN:
@@ -429,6 +455,7 @@ public class MainController {
 
                         menuAllProjects.setDisable(false);
                         menuManageUsersProfiles.setDisable(false);
+                        menuGenerateReport.setDisable(false);
                         break;
                     default:
                         logger.error("unknown role!");

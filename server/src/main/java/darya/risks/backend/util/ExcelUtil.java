@@ -22,7 +22,7 @@ public class ExcelUtil {
             "Employer ID", "Employer First Name", "Employer Last Name", "Employer Company Name"};
 
 
-    public static void generateExcelProjectsReport(List<Contact> contacts, String sheetTitle) throws ApplicationException {
+    public static void generateExcelProjectsReport(List<Contact> contacts, String sheetTitle, String path) throws ApplicationException {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_TIME_FORMAT_PATTERN);
         int rowIndex = 0;
         try (Workbook workbook = new XSSFWorkbook()) {
@@ -69,7 +69,12 @@ public class ExcelUtil {
                 sheet.autoSizeColumn(i);
             }
             // Write the output to a file
-            FileOutputStream fileOut = new FileOutputStream("projects_report.xlsx");
+            if (!path.isEmpty()) {
+                path = path + "/";
+            }
+            logger.debug("path " + path);
+
+            FileOutputStream fileOut = new FileOutputStream(path + "projects_report.xlsx");
             workbook.write(fileOut);
             fileOut.close();
 
